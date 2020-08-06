@@ -21,7 +21,8 @@ def check_server(ip, port, service_name):
         try:
             subprocess.check_output([cmd], timeout=10, shell=True, stderr=subprocess.STDOUT)
             return {service_name: 'alive'}
-        except:
+        except subprocess.TimeoutExpired :
+            print(f'cant reach {service_name}, retrying ...')
             count += 1
             if count == 3:
                 return {service_name: 'dead'}
