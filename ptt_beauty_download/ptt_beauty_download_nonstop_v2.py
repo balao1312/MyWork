@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import smtplib
 from email.mime.text import MIMEText
 
+
 def lineNotifyMessage(line_token, msg):
     line_headers = {
         "Authorization": "Bearer " + line_token,
@@ -19,16 +20,17 @@ def helper(arg):
     folder_path = arg[1]
     return pic_download(pic_url, folder_path)
 
-def pic_download(pic_url,folder_path):
+
+def pic_download(pic_url, folder_path):
     file_path = folder_path.joinpath(pic_url.split('/')[-1])
     try:
         pic = requests.get(pic_url, timeout=10)
-    except Exception as e :
+    except Exception as e:
         print(f'oops, something is going wrong!\n{e}')
         return
     with open(file_path, 'wb') as p:
         p.write(pic.content)
-    return 1        # 1= 成功下載未載過的圖片
+    return 1  # 1= 成功下載未載過的圖片
 
 
 def ptt_beauty_download():
@@ -36,7 +38,7 @@ def ptt_beauty_download():
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) '
                              'Chrome/80.0.3987.132 Safari/537.36'}
 
-    pages = 5 # 每個 round 搜幾頁
+    pages = 5  # 每個 round 搜幾頁
 
     path = pathlib.Path.cwd().joinpath('beauty')
     if not pathlib.Path.exists(path):
@@ -99,7 +101,7 @@ def ptt_beauty_download():
                     # 去掉空行
                     if each_line.strip() != '':
                         filter_content += each_line + '\n'
-                print('圖片數:',count)
+                print('圖片數:', count)
                 # 沒imgur圖片就跳下一篇文章
                 if count == 0:
                     print(f'\t文章內沒有imgur圖片')
@@ -145,15 +147,15 @@ def ptt_beauty_download():
                             pic_urls.append(f'https://i.imgur.com/{pic_code}.jpg')
 
                 # 判斷有無下載過，有的話 done +1 然後從 list裡刪除，要刪除要從後面刪，不然索引值會變動然後出錯
-                for i in range(len(pic_urls)-1,-1,-1):
+                for i in range(len(pic_urls) - 1, -1, -1):
                     file_path = folder_path.joinpath(pic_urls[i].split('/')[-1])
                     if file_path.exists():
-                        done +=1
+                        done += 1
                         del pic_urls[i]
 
-                if pic_urls :
+                if pic_urls:
                     folder_path_arg = [folder_path]
-                    arguments_to_send = [(a,b) for a in pic_urls for b in folder_path_arg]
+                    arguments_to_send = [(a, b) for a in pic_urls for b in folder_path_arg]
                     with concurrent.futures.ProcessPoolExecutor() as executor:
                         results = executor.map(helper, arguments_to_send)
 
@@ -166,12 +168,12 @@ def ptt_beauty_download():
 
             url = 'https://www.ptt.cc' + soup.select('a[class="btn wide"]')[1]['href']
             print('=========================')
-            print(f'已處理了 {m+1} / {pages} 頁')
+            print(f'已處理了 {m + 1} / {pages} 頁')
             print('=========================')
 
         # 暫改 stdout 去寫 log檔
         sys.stdout = open('log.txt', 'a')
-        if total_cycle == 0 : print()
+        if total_cycle == 0: print()
         print(f'runCycles = {total_cycle}\t{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} : '
               f'new article count = {new_article_count}')
         sys.stdout = sys.__stdout__
@@ -190,17 +192,15 @@ def ptt_beauty_download():
             lineNotifyMessage(token, message)
             print('Line message sent !')
 
-            sys.stdout = open('new_article_note.txt','a')
+            sys.stdout = open('new_article_note.txt', 'a')
             print(message)
             sys.stdout = sys.__stdout__
         t2 = time.time()
-        print(f'{t2-t1:.2f} s')
+        print(f'{t2 - t1:.2f} s')
         print('enter sleep 600s')
         total_cycle += 1
         time.sleep(600)
 
-def main():
-    ptt_beauty_download()
 
 if __name__ == '__main__':
-    main()
+    ptt_beauty_download()
