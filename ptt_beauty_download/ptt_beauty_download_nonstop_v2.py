@@ -1,7 +1,14 @@
-import re, pathlib, requests, sys, time, datetime, concurrent.futures
-from bs4 import BeautifulSoup
+import concurrent.futures
+import datetime
+import pathlib
+import re
+import requests
 import smtplib
+import sys
+import time
 from email.mime.text import MIMEText
+
+from bs4 import BeautifulSoup
 
 
 def lineNotifyMessage(line_token, msg):
@@ -39,18 +46,14 @@ def ptt_beauty_download():
                              'Chrome/80.0.3987.132 Safari/537.36'}
 
     pages = 5  # 每個 round 搜幾頁
+    token = open('line_token', 'r').read()  # 讀 line token
 
     path = pathlib.Path.cwd().joinpath('beauty')
     if not pathlib.Path.exists(path):
         pathlib.Path.mkdir(path)
 
     print('資料將會放在 {} '.format(path))
-    print('\n開始處理...\n')
-
-    # 傳line
-    token = '2unn268Rs1CkJ5JWGApbmwCPEB9qwSldVV5NNmukbFo'
-    # message = 'new session start'
-    # lineNotifyMessage(token, message)
+    print('\n開始下載...\n')
 
     total_cycle = 0
     while 1:
@@ -101,7 +104,7 @@ def ptt_beauty_download():
                     # 去掉空行
                     if each_line.strip() != '':
                         filter_content += each_line + '\n'
-                print('圖片數:', count)
+                print('==> 圖片數:', count)
                 # 沒imgur圖片就跳下一篇文章
                 if count == 0:
                     print(f'\t文章內沒有imgur圖片')
@@ -164,16 +167,17 @@ def ptt_beauty_download():
                                 done += 1
                                 print(f'抓抓  {done} / {count}')
 
-                print('--已收藏')
+                print('==> 已收藏')
 
             url = 'https://www.ptt.cc' + soup.select('a[class="btn wide"]')[1]['href']
             print('=========================')
             print(f'已處理了 {m + 1} / {pages} 頁')
             print('=========================')
 
-        # 暫改 stdout 去寫 log檔
+        # 暫改 stdout 去寫 log 檔
         sys.stdout = open('log.txt', 'a')
-        if total_cycle == 0: print()
+        if total_cycle == 0:
+            print()
         print(f'runCycles = {total_cycle}\t{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} : '
               f'new article count = {new_article_count}')
         sys.stdout = sys.__stdout__
@@ -189,17 +193,22 @@ def ptt_beauty_download():
 
             # 傳Line
             message = f'{new_article_count} New article(s) : {title_list_str}\n{all_new_article_content}'
-            lineNotifyMessage(token, message)
+            try:
+                lineNotifyMessage(token, message)
+            except Exception:
+                print('訊息量過大超過line限制或是line server有問題！')
             print('Line message sent !')
 
             sys.stdout = open('new_article_note.txt', 'a')
             print(message)
             sys.stdout = sys.__stdout__
         t2 = time.time()
-        print(f'{t2 - t1:.2f} s')
-        print('enter sleep 600s')
+
+        # sleep
+        seconds_to_sleep = 600
+        print(f'spent {t2 - t1:.2f} s, enter sleep {seconds_to_sleep}s')
         total_cycle += 1
-        time.sleep(600)
+        time.sleep(seconds_to_sleep)
 
 
 if __name__ == '__main__':
