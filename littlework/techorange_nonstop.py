@@ -27,7 +27,7 @@ data = {i.split(': ')[0]: i.split(': ')[1] for i in data_str.split('\n')}
 # for cc in cookies_string.split('; '):
 #         ss.cookies[cc.split('=')[0]] = cc.split('=')[1]
 
-pages = 2 # int(input('input pages : '))
+pages = 2  # int(input('input pages : '))
 
 while 1:
     try:
@@ -40,10 +40,10 @@ while 1:
     all_new_article_content = ''
     for m in range(pages):
         res = ss.post(url, headers=headers, data=data)
-        #print(res.text)
+        # print(res.text)
         jdata = json.loads(res.text)
         # pprint.pprint(jdata)
-        html = jdata['data']        # 判斷data標籤中的內容為 html 格式
+        html = jdata['data']  # 判斷data標籤中的內容為 html 格式
         soup = BeautifulSoup(html, 'lxml')
         # print(soup.prettify())
         titles = soup.select('h4[class="entry-title"] a')
@@ -77,9 +77,8 @@ while 1:
             # article_contents = soup.select('div.fb-quotable p')
 
             # 想取文章時間 未確定
-            #article_times = soup.select('time[class="entry-date published updated"]')
+            # article_times = soup.select('time[class="entry-date published updated"]')
             # print(article_times[0].text)
-
 
             # 文章內容 結合成字串
             # sss = article_times[0].text + '\n'
@@ -111,11 +110,10 @@ while 1:
 
         print('Email sent!')
 
-    with open('techorange_data','wb') as f:
+    with open('techorange_data', 'wb') as f:
         pickle.dump(all_article, f)
 
     print('enter sleep')
     time.sleep(600)
 
-
-#print(json.dumps(soup_json, indent=2, ensure_ascii=False))
+# print(json.dumps(soup_json, indent=2, ensure_ascii=False))

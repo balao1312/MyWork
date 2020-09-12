@@ -14,19 +14,19 @@ headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleW
                          'Chrome/80.0.3987.132 Safari/537.36'}
 url = 'https://meteor.today/beautycampaign/get_candidates'
 res = ss.get(url, headers=headers)
-#print(res.text)
+# print(res.text)
 jdata = json.loads(res.text)
-#pprint.pprint(jdata)
+# pprint.pprint(jdata)
 
 if not os.path.exists('./highgirl'):
     os.mkdir('./highgirl')
 path = './highgirl'
 for eachone in jdata['result']:
     print(eachone['name'])
-    for i in range(1,4):
+    for i in range(1, 4):
         pp = 'img_' + str(i)
         pic = requests.get(eachone[pp])
-        with open(path + '/' + eachone['name']+ '_' + str(i) +'.jpeg','wb') as f :
+        with open(path + '/' + eachone['name'] + '_' + str(i) + '.jpeg', 'wb') as f:
             f.write(pic.content)
 
 print('done')
