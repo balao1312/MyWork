@@ -21,7 +21,7 @@ def check_server(ip, port, service_name):
         try:
             subprocess.check_output([cmd], timeout=10, shell=True, stderr=subprocess.STDOUT)
             return {service_name: 'alive'}
-        except subprocess.TimeoutExpired :
+        except subprocess.TimeoutExpired:
             print(f'cant reach {service_name}, retrying ...')
             count += 1
             if count == 3:
@@ -36,14 +36,9 @@ if __name__ == '__main__':
 
     # 定義有哪些 server 要監控
     servers_to_check = [
-        {'ip': '35.194.137.72', 'port': 9092, 'service_name': 'kafka'},
-        {'ip': '35.194.137.72', 'port': 6379, 'service_name': 'redis'},
-        {'ip': '34.80.186.211', 'port': 3306, 'service_name': 'MySQL_GCP'},
-        {'ip': '1.tcp.jp.ngrok.io', 'port': 23879, 'service_name': 'MySQL_local'},
-        {'ip': '1.tcp.jp.ngrok.io', 'port': 23853, 'service_name': 'Hadoop_HDFS'},
-        {'ip': '35.194.191.163', 'port': 9200, 'service_name': 'Elasticsearch'},
-        {'ip': '35.194.191.163', 'port': 5601, 'service_name': 'Kibana'}
-
+        {'ip': '172.105.202.99', 'port': 9092, 'service_name': 'kafka'},
+        {'ip': '172.105.202.99', 'port': 6379, 'service_name': 'redis'},
+        {'ip': '172.105.202.99', 'port': 3306, 'service_name': 'MySQL'}
     ]
 
     server_status = {}
@@ -57,26 +52,26 @@ if __name__ == '__main__':
 
             for service, status in server_status.items():
                 if status == 'dead':
-                    msg = f'\n[{now_time}] Oops !! {service} is dead !!'
+                    msg = f'[{now_time}] Oops !! {service} is dead !!\n'
                     try:
                         lineNotifyMessage(token, msg)
                     except:
                         print('!! Problem with line server')
 
-                    print(f'\n[{now_time}] Oops !! {service} is dead !!')
-                    open('server_status_log', 'a').write(f'\n[{now_time}] {service} is down')
+                    print(f'[{now_time}] Oops !! {service} is dead !!\n')
+                    open('./log/server_status_log', 'a').write(f'\n[{now_time}] {service} is down')
 
-            print(f'\n[{now_time}] server_status : {server_status}')
+            print(f'[{now_time}] server_status : {server_status}\n')
             print('=' * 80)
-            open('server_status_log', 'a').write(f'\n[{now_time}] server_status : {server_status}')
+            open('./log/server_status_log', 'a').write(f'[{now_time}] server_status : {server_status}\n')
 
         # 每小時送一次狀態給 line
         if datetime.datetime.now().strftime('%M') == '00':
 
-            if not 'dead' in server_status.values():
+            if 'dead' not in server_status.values():
 
                 try:
-                    lineNotifyMessage(token, f'\n[{now_time}] All server working fine')
+                    lineNotifyMessage(token, f'[{now_time}] All server working fine\n')
                 except:
                     print('!! Problem with line server')
 

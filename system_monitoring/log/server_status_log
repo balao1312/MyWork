@@ -1,0 +1,19 @@
+
+[2020-07-20 17:55] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-20 18:00] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-20 18:05] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-20 18:10] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-20 18:15] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-20 18:20] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-20 18:30] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-20 20:45] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-20 20:50] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-20 20:55] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-22 14:42] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'alive'}
+[2020-07-22 14:44] Kibana is down
+[2020-07-22 14:44] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'dead'}
+[2020-07-22 14:45] Kibana is down
+[2020-07-22 14:45] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL_GCP': 'alive', 'MySQL_local': 'alive', 'Hadoop_HDFS': 'alive', 'Elasticsearch': 'alive', 'Kibana': 'dead'}
+[2020-09-14 01:35] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL': 'alive'}
+[2020-09-14 01:35] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL': 'alive'}
+[2020-09-14 01:35] server_status : {'kafka': 'alive', 'redis': 'alive', 'MySQL': 'alive'}
