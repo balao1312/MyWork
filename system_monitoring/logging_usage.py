@@ -29,8 +29,17 @@ while 1:
     mem_used = mem_status[2]
     # print(mem_status)
     mem_usage = round((int(mem_used) / int(mem_total))*100, 1)
-    mem_total = round((int(mem_total) / 1024 / 1024), 0)
+    mem_total = round((int(mem_total) / 1024 / 1024), 1)
     # print(mem_total, mem_available)
+
+    swap_status = result.split('\n')[2].split(' ')
+    swap_status = list(filter(None, swap_status))
+    swap_total = swap_status[1]
+    swap_available = swap_status[3]
+    swap_used = swap_status[2]
+    # print(mem_status)
+    swap_usage = round((int(swap_used) / int(swap_total)) * 100, 1)
+    swap_total = round((int(swap_total) / 1024 / 1024), 1)
 
     cmd = 'df -h'
     result = subprocess.check_output([cmd], timeout=10, shell=True, stderr=subprocess.STDOUT).decode('utf8')
@@ -41,6 +50,6 @@ while 1:
     # print(storage)
 
     with open(log_dir.joinpath('resources_log'), 'a') as f:
-        f.write(f'{now_time}|{cpu_load}|{mem_usage}%, {mem_total}G|{sotrage_usage}, {storage_total}\n')
+        f.write(f'{now_time}|{cpu_load}|{mem_usage}%, {mem_total}G|{sotrage_usage}, {storage_total}|{swap_usage}%, {swap_total}G\n')
 
     time.sleep(60)

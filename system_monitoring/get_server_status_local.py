@@ -27,9 +27,11 @@ if __name__ == '__main__':
         cpu = status.split('|')[1]
         mem = status.split('|')[2]
         disk = status.split('|')[3]
+        swap = status.split('|')[4]
 
         # for screen output
-        msg = f'server : linode\nchecktime : {checktime}\ncpu load : {cpu}\nmem usage : {mem}\nstorage usage : {disk}\n'
+        msg = f'server : linode\nchecktime : {checktime}\ncpu load : {cpu}\nmem usage : {mem}\nstorage usage : {disk}\n' \
+              f'swap usage : {swap}'
         print(msg)
 
         if float(cpu.split(', ')[-1]) > 1.0 or float(mem.split(',')[0][:-1]) > 90.0 or \
