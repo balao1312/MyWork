@@ -58,7 +58,7 @@ if __name__ == '__main__':
         for each in servers_to_check:
             notify_msg += get_server_status(each) + '\n'
 
-        if datetime.datetime.now().strftime('%M') == '00':
+        if datetime.datetime.now().minute = 0:
             try:
                 lineNotifyMessage(token, notify_msg[:-1])
             except:
