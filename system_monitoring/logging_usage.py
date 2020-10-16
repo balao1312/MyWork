@@ -3,7 +3,7 @@ import subprocess
 import time
 import pathlib
 
-log_dir = pathlib.Path.cwd().joinpath('logs')
+log_dir = pathlib.Path.cwd().joinpath('log')
 if not log_dir.exists():
     log_dir.mkdir()
 
@@ -53,4 +53,3 @@ while 1:
         f.write(f'{now_time}|{cpu_load}|{mem_usage}%, {mem_total}G|{sotrage_usage}, {storage_total}|{swap_usage}%, {swap_total}G\n')
 
     time.sleep(60)
-

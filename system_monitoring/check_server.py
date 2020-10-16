@@ -38,9 +38,7 @@ if __name__ == '__main__':
     servers_to_check = [
         {'ip': '172.105.202.99', 'port': 9092, 'service_name': 'kafka'},
         {'ip': '172.105.202.99', 'port': 6379, 'service_name': 'redis'},
-        {'ip': '172.105.202.99', 'port': 3306, 'service_name': 'MySQL'},
-        {'ip': '172.104.68.207', 'port': 22, 'service_name': 'MBM_vm'},
-        {'ip': '172.104.68.207', 'port': 5432, 'service_name': 'PostgreSQL'}
+        {'ip': '172.105.202.99', 'port': 3306, 'service_name': 'MySQL'}
     ]
 
     server_status = {}
@@ -61,11 +59,11 @@ if __name__ == '__main__':
                         print('!! Problem with line server')
 
                     print(f'[{now_time}] Oops !! {service} is dead !!\n')
-                    open('./logs/server_status_log', 'a').write(f'\n[{now_time}] {service} is down')
+                    open('./log/server_status_log', 'a').write(f'\n[{now_time}] {service} is down')
 
             print(f'[{now_time}] server_status : {server_status}\n')
             print('=' * 80)
-            open('./logs/server_status_log', 'a').write(f'[{now_time}] server_status : {server_status}\n')
+            open('./log/server_status_log', 'a').write(f'[{now_time}] server_status : {server_status}\n')
 
         # 每小時送一次狀態給 line
         if datetime.datetime.now().strftime('%M') == '00':
@@ -89,4 +87,3 @@ if __name__ == '__main__':
     # for service, status in server_status.items():
     #     msg += f'{service} status : {status}\n'
     # lineNotifyMessage(token, msg)
-
