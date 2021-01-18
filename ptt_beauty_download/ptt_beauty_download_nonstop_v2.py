@@ -46,7 +46,7 @@ def ptt_beauty_download():
                              'Chrome/80.0.3987.132 Safari/537.36'}
 
     pages = 5  # 每個 round 搜幾頁
-    token = open('line_token', 'r').read()  # 讀 line token
+    token = '2unn268Rs1CkJ5JWGApbmwCPEB9qwSldVV5NNmukbFo' #open('line_token', 'r').read()  # 讀 line token
 
     path = pathlib.Path.cwd().joinpath('beauty')
     if not pathlib.Path.exists(path):
